@@ -1,0 +1,27 @@
+.DS_Store
+.idea
+.trae
+.claude
+
+.langgraph_api
+.ipynb_checkpoints
+
+.env
+.venv
+
+__pycache__
+archived
+
+*.log
+*.err
+*.db
+*.db-wal
+*.db-shm
+
+# MyST build outputs
+_build
+_static
+
+# Claude Code local settings
+.claude/settings.local.json
+
