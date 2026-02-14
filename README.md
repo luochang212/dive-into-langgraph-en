@@ -4,21 +4,21 @@
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/github/stars/luochang212/dive-into-langgraph?style=flat&logo=github" alt="GitHub stars"/>
-  <img src="https://img.shields.io/github/forks/luochang212/dive-into-langgraph?style=flat&logo=github" alt="GitHub forks"/>
+  <img src="https://img.shields.io/github/stars/luochang212/dive-into-langgraph-en?style=flat&logo=github" alt="GitHub stars"/>
+  <img src="https://img.shields.io/github/forks/luochang212/dive-into-langgraph-en?style=flat&logo=github" alt="GitHub forks"/>
   <img src="https://img.shields.io/badge/language-English-brightgreen?style=flat" alt="Language"/>
-  <a href="https://github.com/luochang212/dive-into-langgraph"><img src="https://img.shields.io/badge/GitHub-Project-blue?style=flat&logo=github" alt="GitHub Project"></a>
-  <a href="https://github.com/luochang212/dive-into-langgraph/actions/workflows/deploy-book.yml"><img src="https://github.com/luochang212/dive-into-langgraph/actions/workflows/deploy-book.yml/badge.svg?branch=main" alt="deploy-book"/></a>
+  <a href="https://github.com/luochang212/dive-into-langgraph-en"><img src="https://img.shields.io/badge/GitHub-Project-blue?style=flat&logo=github" alt="GitHub Project"></a>
+  <a href="https://github.com/luochang212/dive-into-langgraph-en/actions/workflows/deploy-book.yml"><img src="https://github.com/luochang212/dive-into-langgraph-en/actions/workflows/deploy-book.yml/badge.svg?branch=main" alt="deploy-book"/></a>
 </div>
 
 <div align="center">
 
-[Chinese](./docs/README-zh.md) | English
+[Chinese](https://github.com/luochang212/dive-into-langgraph) | English
 
 </div>
 
 <div align="center">
-  <p><a href="https://www.luochang.ink/dive-into-langgraph/">📚 Read Online</a></p>
+  <p><a href="https://www.luochang.ink/dive-into-langgraph-en/">📚 Read Online</a></p>
   <h3>📖 LangGraph 1.0 Guide</h3>
   <p><em>Build powerful Agents from scratch</em></p>
 </div>
@@ -100,11 +100,11 @@ Overview of this tutorial's content:
 langgraph dev
 ```
 
-See details: [Appendix](https://www.luochang.ink/dive-into-langgraph/langgraph-cli/)
+See details: [Appendix: Debug Page](https://www.luochang.ink/dive-into-langgraph-en/langgraph-cli/)
 
 ## 5. Practical Chapter
 
-[Chapter 13](https://www.luochang.ink/dive-into-langgraph/gradio-app/) open-sources an Agent application implemented with Gradio + LangChain. The effect is shown below. You can add more features to this application and customize your own Agent.
+[Chapter 13](https://www.luochang.ink/dive-into-langgraph-en/gradio-app/) open-sources an Agent application implemented with Gradio + LangChain. The effect is shown below. You can add more features to this application and customize your own Agent.
 
 ![gradio_app](./app/images/gradio_app.webp)
 
