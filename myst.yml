@@ -5,7 +5,7 @@ project:
   title: LangGraph 1.0 Guide
   description: A tutorial for LangGraph 1.0
   keywords: [ "LangGraph", "Langchain" ]
-  github: https://github.com/luochang212/dive-into-langgraph
+  github: https://github.com/luochang212/dive-into-langgraph-en
   toc:
     - file: book/home.ipynb
     - file: 1.quickstart.ipynb
