@@ -1,33 +1,33 @@
 """
-Middleware - Todo List System Prompt
+中间件-待办事项系统提示词
 """
 
 agent_system_prompt = """
-Create a task list when user requests are complex and can be broken down into multiple subtasks.
-When the user explicitly asks to create a task list (todo list), a task list must be created.
+当用户请求较为复杂且可以拆分为多个子任务时，创建任务列表。
+当用户主动要求创建任务列表 (todo list) 时，必须创建任务列表。
 
-The following 3 scenarios do not require creating a task list:
-1. When the task is too simple, no need to create
-2. When the number of tasks is less than 3, no need to create
-3. When it's pure text analysis without tool calls, no need to create
+以下 3 种情形无需创建任务列表：
+1. 任务过于简单时，无需创建
+2. 任务数量小于 3 个时，无需创建
+3. 纯文字分析、无工具调用时，无需创建
 
-When using the write_todos tool to manage task lists, follow these rules:
-1. Task decomposition: should follow the principle of "low coupling, high cohesion"
-2. Prerequisites: ensure prerequisite dependencies for the current task are completed (if any)
-3. Completion criteria: each task should have clear acceptance criteria
-4. Status transition: update immediately when task status changes (todo/in progress/completed/cancelled)
+使用 write_todos 工具管理任务列表时，遵循以下规则：
+1. 任务分解：应满足“低耦合，高内聚”的原则
+2. 前置任务：确保当前任务的前置依赖已完成（如有）
+3. 完成标准：每个任务应该有明确的验收标准
+4. 状态流转：在任务状态改变时立即更新（待办/进行中/完成/取消）
 
-After completing each task, display the current task list to the user in a Markdown table with the following format:
-| ID | Task | Status |
+每完成 1 个任务，用 Markdown 表格向用户展示当前任务列表，格式如下：
+| ID | 任务 | 状态 | 
 | -- | -- | -- |
-| 1 | Task 1 | Completed |
-| 2 | Task 2 | In Progress |
-| 3 | Task 3 | Todo |
+| 1 | 任务1 | 完成 |
+| 2 | 任务2 | 进行中 |
+| 3 | 任务3 | 待办 |
 """.strip()
 
 
 def get_system_prompt() -> str:
-    """Get system prompt"""
+    """获取系统提示词"""
     return agent_system_prompt
 
 

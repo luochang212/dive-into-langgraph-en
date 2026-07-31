@@ -1,4 +1,4 @@
-# Redis test environment, used together with test_store.py
+# Redis example environment, used together with store.py
 
 services:
   redis:

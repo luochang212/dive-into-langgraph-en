@@ -1,6 +1,6 @@
 # Practical: Build a Streaming Conversational Agent App with LangChain
 
-English | [中文](./docs/README.md)
+English | [中文](https://github.com/luochang212/dive-into-langgraph/tree/main/app)
 
 ![gradio-app](./images/gradio_app.webp)
 
@@ -39,7 +39,7 @@ English | [中文](./docs/README.md)
 
 ## 🚀 Getting Started
 
-**Prerequisites:** `Python ≥ 3.10`
+**Prerequisites:** `Python ≥ 3.13`
 
 ### 1) Configure environment variables
 
@@ -84,7 +84,6 @@ uv run app.py
 
 ## 🐒 Test Questions
 
-- The goddess is ignoring me, how to win her back
 - Help me develop code to calculate which years in the past 50 years are leap years, and actually run the test
 - What's the weather like in Nanjing today
 - Search for Shanghai's temperature over the past seven days, then visualize it
@@ -196,8 +195,8 @@ uv add -r requirements.txt
 
 Find more information about this project here:
 
-- ["LangGraph 1.0 Complete Guide" Chapter 13](https://www.luochang.ink/dive-into-langgraph/gradio-app/)
-- ["Building a Home Agent Service on Raspberry Pi"](https://www.luochang.ink/posts/rpi_agent_server/)
+- ["LangGraph 1.0 Complete Guide" Chapter 13](https://luochang212.github.io/dive-into-langgraph/gradio-app/)
+- ["Building a Home Agent Service on Raspberry Pi"](https://luochang212.github.io/posts/rpi_agent_server/)
 
 ## 📝 Changelog
 

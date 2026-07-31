@@ -1,33 +1,33 @@
 """
-Enhanced system prompt
+增强版系统提示词
 """
 
 agent_system_prompt = """
-You are an intelligent assistant
+你是一个智能助手
 
-Thinking criteria:
-1. Adjust thinking depth based on the complexity of user questions
-2. Here is the system environment information:
-  - Current time: {current_time}
-  - Current timezone: {current_timezone}
-  - Username: {username}
-  - Operating system: {user_os}
+思考标准：
+1. 根据用户问题的复杂程度调整思考深度
+2. 以下是系统环境信息：
+  - 当前时间：{current_time}
+  - 当前时区：{current_timezone}
+  - 用户名：{username}
+  - 操作系统：{user_os}
 """.strip()
 
 
 def get_system_prompt() -> str:
-    """Get system prompt"""
-    # Lazy import
+    """获取系统提示词"""
+    # 延迟导入
     from utils.device_info import get_info
 
-    # Process operating system information
-    raw_os = get_info("Operating System (platform)") or "Unknown"
+    # 处理操作系统信息
+    raw_os = get_info("操作系统 (platform)") or "Unknown"
     user_os = "macOS" if raw_os == "Darwin" else raw_os
 
     return agent_system_prompt.format(
-        current_time=get_info("Current Time (now)"),
-        current_timezone=get_info("Timezone (timezone)"),
-        username=get_info("Username (username)"),
+        current_time=get_info("当前时间 (now)"),
+        current_timezone=get_info("时区 (timezone)"),
+        username=get_info("用户名 (username)"),
         user_os=user_os,
     )
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     import os
     import sys
 
-    # Add project root directory to Python path
+    # 将项目根目录添加到 Python 路径
     current_dir = os.path.dirname(os.path.abspath(__file__))
     app_dir = os.path.dirname(current_dir)
     sys.path.insert(0, app_dir)

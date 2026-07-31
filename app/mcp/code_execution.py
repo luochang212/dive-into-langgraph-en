@@ -1,5 +1,5 @@
 """
-Code Execution MCP Server
+代码执行 MCP Server
 """
 
 import sys
@@ -11,21 +11,21 @@ import os
 from fastmcp import FastMCP
 
 
-# Code execution tool
+# 代码执行工具
 mcp = FastMCP("code-execution")
 
 
 @mcp.tool
 def execute_python(code: str) -> str:
     """
-    Execute Python code and return the result
-    Used for mathematical calculations, data analysis, and logical processing
+    执行 Python 代码并返回结果
+    用于数学计算、数据分析和逻辑处理
 
     Args:
-        code (str): Python code to execute
+        code (str): 要执行的 Python 代码
 
     Returns:
-        str: Standard output or standard error output of code execution
+        str: 代码执行的标准输出或标准错误输出
     """
     # Normalize indentation (LLMs love extra spaces)
     code = textwrap.dedent(code)
@@ -73,23 +73,23 @@ def execute_python(code: str) -> str:
 
 
 if __name__ == "__main__":
-    # # Test
+    # # 测试
     # print(execute_python("""
     # import math
     # print(sum([i for i in range(10)]))
     # print(math.pi)
     # """))
 
-    # Start MCP Server
+    # 启动 MCP Server
     import argparse
     import asyncio
 
-    # Configure network parameters
+    # 配置网络参数
     host = os.getenv('HOST', '127.0.0.1')
     port = int(os.getenv('PORT', 8001))
 
-    parser = argparse.ArgumentParser(description="Start code execution MCP Server")
-    parser.add_argument("-t", "--transport", type=str, default="stdio", help="Communication method, optional stdio or http")
+    parser = argparse.ArgumentParser(description="启动代码执行 MCP Server")
+    parser.add_argument("-t", "--transport", type=str, default="stdio", help="通信方式，可选 stdio 或 http")
     args = parser.parse_args()
 
     if args.transport == "stdio":

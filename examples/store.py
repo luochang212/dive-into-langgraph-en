@@ -3,6 +3,7 @@ Using RedisStore to store agent memory
 Reference: https://docs.langchain.com/oss/python/langgraph/add-memory#add-long-term-memory
 
 Preparation before running:
+    $ cd examples
     $ pip install -U langgraph-checkpoint-redis
     $ docker compose up -d
     $ docker exec myredis redis-cli ping

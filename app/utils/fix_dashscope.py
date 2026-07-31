@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Currently ChatOpenAI cannot correctly parse the thinking chain content in DashScope API.
-This module parses the reasoning_content field from DashScope by overriding the _astream method.
+当前 ChatOpenAI 无法正确解析 DashScope API 中思维链 (thinking) 的内容
+本模块通过重写 _astream 方法，将 DashScope 的 reasoning_content 字段解析出来
 """
 
 from typing import Any, AsyncIterator, List, Optional

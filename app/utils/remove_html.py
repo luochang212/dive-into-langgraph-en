@@ -1,11 +1,11 @@
 """
-Clean chat content with HTML <details> blocks into readable plain text.
+将带有 HTML <details> 块的聊天内容清洗为可读纯文本。
 
-Processing rules:
-- Remove thinking blocks: match <details class="think-result-details">...</details>
-- Remove HTML from tool blocks but preserve tool output inside <pre>, replacing with explicit tags:
-  - Default: ```tool_return\n...\n``` (tool name omitted)
-  - include_tool_name=True: ```tool_return name="..."\n...\n``` (name from <code>)
+处理规则：
+- 删除思维链块：匹配 <details class="think-result-details">...</details>
+- 删除工具块的 HTML，但保留 <pre> 内的工具输出，并替换为明确标签：
+  - 默认：```tool_return\n...\n```（工具名省略）
+  - include_tool_name=True 时：```tool_return name="..."\n...\n```（name 来自 <code>）
 """
 
 import html

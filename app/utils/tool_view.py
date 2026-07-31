@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Optimize tool call input/output display
+优化工具调用输入/结果显示
 """
 
 import html
@@ -66,11 +66,11 @@ def format_tool_call(tool_name: str, tool_args: Any) -> str:
 
 def format_tool_result(tool_name: str, tool_output: Any) -> str:
     """
-    Format tool call result and return HTML string.
+    格式化工具调用结果，返回 HTML 字符串。
 
-    :param tool_name: Tool name
-    :param tool_output: Tool call output
-    :return: Formatted HTML string
+    :param tool_name: 工具名称
+    :param tool_output: 工具调用输出
+    :return: 格式化后的 HTML 字符串
     """
     safe_tool_name = html.escape(tool_name)
     safe_tool_output = html.escape(_to_display_text(tool_output))

@@ -1,5 +1,5 @@
 """
-Scientific computing tool
+科学计算工具
 """
 
 import ast
@@ -11,7 +11,7 @@ from langchain.tools import tool
 
 class SafeEvaluator(ast.NodeVisitor):
 
-    # Supported binary operations
+    # 支持的二元运算
     BIN_OPS = {
         ast.Add: operator.add,
         ast.Sub: operator.sub,
@@ -22,13 +22,13 @@ class SafeEvaluator(ast.NodeVisitor):
         ast.FloorDiv: operator.floordiv,
     }
 
-    # Supported unary operations
+    # 支持的一元运算
     UNARY_OPS = {
         ast.UAdd: operator.pos,
         ast.USub: operator.neg,
     }
 
-    # Supported functions
+    # 支持的函数
     SAFE_FUNCS = {
         "sqrt": math.sqrt,
         "exp": math.exp,
@@ -48,54 +48,54 @@ class SafeEvaluator(ast.NodeVisitor):
         return self.visit(node.body)
 
     def visit_Name(self, node):
-        # Explicitly prohibit variable names
-        raise ValueError(f"Variables not supported: {node.id}")
+        # 明确禁止变量名
+        raise ValueError(f"不支持变量: {node.id}")
 
     def visit_BinOp(self, node):
-        # Check binary operators
+        # 检查二元运算符
         op_type = type(node.op)
         if op_type not in self.BIN_OPS:
-            raise ValueError(f"Unsupported binary operator: {op_type}")
+            raise ValueError(f"不支持的二元运算符: {op_type}")
         left = self.visit(node.left)
         right = self.visit(node.right)
         return self.BIN_OPS[op_type](left, right)
 
     def visit_UnaryOp(self, node):
-        # Check unary operators
+        # 检查一元运算符
         op_type = type(node.op)
         if op_type not in self.UNARY_OPS:
-            raise ValueError(f"Unsupported unary operator: {op_type}")
+            raise ValueError(f"不支持的一元运算符: {op_type}")
         operand = self.visit(node.operand)
         return self.UNARY_OPS[op_type](operand)
 
     def visit_Call(self, node):
-        # Check function calls
+        # 检查函数调用
         if not isinstance(node.func, ast.Name):
-            raise ValueError("Invalid function call format")
+            raise ValueError("函数调用格式错误")
 
         func_name = node.func.id
         if func_name not in self.SAFE_FUNCS:
-            raise ValueError(f"Unsupported function: {func_name}")
+            raise ValueError(f"不支持的函数: {func_name}")
 
         if len(node.args) != 1:
-            raise ValueError(f"{func_name} function requires exactly one argument")
+            raise ValueError(f"{func_name} 函数需要且仅需要一个参数")
 
         arg = self.visit(node.args[0])
         return self.SAFE_FUNCS[func_name](arg)
 
     def visit_Constant(self, node):
         if not isinstance(node.value, (int, float)):
-            raise ValueError(f"Only integers or floats are supported, not {type(node.value).__name__}")
+            raise ValueError(f"只支持整数或浮点数，不支持 {type(node.value).__name__}")
         return node.value
 
     def generic_visit(self, node):
-        # Reject all nodes not in the whitelist
-        raise ValueError(f"Unsupported syntax: {type(node).__name__}")
+        # 一切未列入白名单的节点，直接拒绝
+        raise ValueError(f"不支持的语法: {type(node).__name__}")
 
     def evaluate(self, expression: str) -> float | int:
-        # Safely evaluate mathematical expressions
+        # 安全计算数学表达式
         if not expression.strip():
-            raise ValueError("Expression cannot be empty")
+            raise ValueError("表达式不能为空")
 
         try:
             tree = ast.parse(expression, mode="eval")
@@ -104,25 +104,25 @@ class SafeEvaluator(ast.NodeVisitor):
             if isinstance(result, (int, float)):
                 return result
             else:
-                raise ValueError(f"Invalid result type: {type(result)}")
+                raise ValueError(f"计算结果类型错误: {type(result)}")
         except ZeroDivisionError:
-            raise ValueError("Division by zero error")
-        except ValueError as e:
+            raise ValueError("除零错误")
+        except ValueError:
             raise
         except Exception as e:
-            raise ValueError(f"Invalid mathematical expression: {str(e)}")
+            raise ValueError(f"无效的数学表达式: {str(e)}")
 
 
 @tool()
 def calculator(expression: str) -> str:
     """
-    Safely evaluate mathematical expressions
+    安全计算数学表达式
 
-    Supported operators: + - * / ** ()
-    Supported functions: sqrt exp log log2 log10 sin cos tan abs
+    支持的运算符: + - * / ** ()
+    支持的函数: sqrt exp log log2 log10 sin cos tan abs
 
-    Note: The above functions only support single arguments. Expressions like log(9, 3) are not supported.
-    Example: Calculate (sqrt(9) + 1) ** 2
+    注意: 上叙函数仅支持单参数。像 log(9, 3) 这样的，不行
+    例子: 计算 (sqrt(9) + 1) ** 2
     """
     evaluator = SafeEvaluator()
     result = evaluator.evaluate(expression)

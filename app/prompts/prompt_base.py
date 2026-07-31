@@ -1,12 +1,12 @@
 """
-Basic system prompt
+基础版系统提示词
 """
 
 agent_system_prompt = "You are a helpful assistant. Be concise and accurate."
 
 
 def get_system_prompt() -> str:
-    """Get system prompt"""
+    """获取系统提示词"""
     return agent_system_prompt
 
 

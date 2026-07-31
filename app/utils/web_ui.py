@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Gradio Chat Interface
+Gradio 聊天界面
 
-Define chat interface styles, simulating LLM responses through the `generate_response` function.
+定义聊天界面样式，通过 `generate_response` 函数模拟大语言模型的回复。
 """
 
 import gradio as gr
@@ -12,50 +12,37 @@ import time
 import os
 
 
-# Simulate LLM generating responses
+# 模拟大语言模型生成回复
 def generate_response(message, history):
     if not message.strip():
         return message, history
 
-    # Simulate LLM processing delay
+    # 模拟大语言模型处理延迟
     processing_time = random.uniform(0.5, 1.5)
     time.sleep(processing_time)
 
-    # Simulate generating intelligent responses
+    # 模拟生成智能回复
     responses = [
         "这是一个基于大语言模型的回复示例。",
         "我理解你的查询了。",
         "感谢你的提问！"
     ]
 
-    # Use new message format
+    # 使用新的消息格式
     history.append({"role": "user", "content": message})
     history.append({"role": "assistant", "content": random.choice(responses)})
     return "", history
 
 
-# Custom CSS styles
+# 自定义 CSS 样式
 custom_css = """
-@font-face {
-    font-family: 'Source Han Sans CN';
-    src: url('https://s2.loli.net/2024/06/10/3YNvDwcS7kK9P1E.woff2')  format('woff2');
-}
-
 html, body {
     height: 100%;
     margin: 0;
     overflow: hidden;
 }
 
-:root {
-    --primary: #007AFF;
-    --secondary: #0066CC;
-    --dark: #1C1C1E;
-    --light: #F2F2F7;
-    --gray: #E5E5EA;
-}
-
-/* Global style overrides */
+/* 全局样式覆盖 */
 .gradio-container {
     background: #181818 !important;
 }
@@ -69,7 +56,7 @@ html, body {
     overflow: hidden;
 }
 
-/* Header fixed height */
+/* 标题栏固定高度 */
 #header {
     flex: 0 0 auto;
     height: 60px !important;
@@ -87,7 +74,7 @@ html, body {
     line-height: 40px !important;
 }
 
-/* Chat area styles */
+/* 聊天区域样式 */
 #chatbot {
     flex: 1 1 auto;
     height: calc(100vh - 60px) !important; /* 减去固定的标题栏高度 */
@@ -99,12 +86,12 @@ html, body {
     display: flex !important;
     flex-direction: column !important;
 
-    /* Firefox scrollbar styles */
+    /* Firefox 滚动条样式 */
     scrollbar-width: thin !important;
     scrollbar-color: rgba(255, 255, 255, 0.1) transparent !important;
 }
 
-/* Webkit browsers (Chrome/Safari) scrollbar styles */
+/* Webkit 浏览器(Chrome/Safari)滚动条样式 */
 #chatbot::-webkit-scrollbar {
     width: 6px !important;
     height: 6px !important;
@@ -119,42 +106,39 @@ html, body {
     border-radius: 3px !important;
 }
 
-#chatbot::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-}
-
 #chatbot > .wrapper {
     display: flex !important;
     flex-direction: column !important;
     flex-grow: 1 !important;
 }
 
-/* Force override Chatbot internal container background */
+/* 强制覆盖 Chatbot 内部容器背景 */
 #chatbot > .wrapper, 
 #chatbot .bubble-wrap {
     background-color: #181818 !important;
 }
 
-/* Ensure message list background is transparent or matching */
+/* 确保消息列表背景透明或匹配 */
 #chatbot .message-wrap {
     background-color: #181818 !important;
 }
 
-/* Ensure message rows take full width and handle margins */
-/* AI reply avatar and text bubble */
-#chatbot .bot-row {
+/* 确保消息行占满宽度并处理边距 */
+/* AI 回复头像及文字气泡 */
+#chatbot .bot-row,
+#chatbot .message-wrap > div:has(> .avatar-container):not(.user-row) {
     margin-left: 15% !important; /* AI 消息向右移动 */
     width: 75% !important;
 }
 
-/* User reply avatar and text bubble */
+/* 用户回复头像及文字气泡 */
 #chatbot .user-row {
     margin-right: 15% !important; /* 用户消息向左移动 */
     max-width: 40% !important;
     /* width: 80% !important; */
 }
 
-/* AI reply bubble transparent and borderless - multi-version compatible selectors */
+/* AI 回复气泡透明无边框 - 多版本兼容选择器 */
 .bot.message {
     width: 83% !important;
     background: transparent !important;
@@ -163,7 +147,7 @@ html, body {
     padding-left: 0 !important;
 }
 
-/* Input area styles */
+/* 输入区域样式 */
 .input-row {
     position: fixed !important;
     bottom: 30px;
@@ -191,7 +175,7 @@ html, body {
     backdrop-filter: blur(20px); /* 毛玻璃效果 */
 }
 
-/* Textbox styles */
+/* 文本框样式 */
 .textbox {
     flex: 1 1 auto;
     border-radius: 24px;
@@ -213,18 +197,18 @@ html, body {
     scrollbar-width: none;  /* Firefox */
 }
 
-/* Hide scrollbar but keep scrolling functionality */
+/* 隐藏滚动条但保留滚动功能 */
 .textbox textarea::-webkit-scrollbar {
     display: none;
 }
 
-/* Focus effect */
+/* 焦点效果 */
 .textbox:focus {
     border-color: var(--primary) !important;
     box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2) !important;
 }
 
-/* Button styles */
+/* 按钮样式 */
 .button {
     flex: 0 0 auto;
     height: 45px;
@@ -238,13 +222,58 @@ html, body {
     box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2) !important;
 }
 
-/* Hover effect */
+/* 悬停效果 */
 .button:hover {
     background: var(--secondary) !important;
     box-shadow: 0 6px 16px rgba(0, 122, 255, 0.3) !important;
 }
 
-/* Click effect */
+.stop-button {
+    background: #dc2626 !important;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2) !important;
+}
+
+.stop-button:hover {
+    background: #b91c1c !important;
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3) !important;
+}
+
+.typing-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 32px;
+    min-height: 18px;
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    animation: typing-dot 1.1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.16s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.32s;
+}
+
+@keyframes typing-dot {
+    0%, 80%, 100% {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+}
+
+/* 点击效果 */
 .button:active {
     transform: scale(0.98);
 }
@@ -253,9 +282,9 @@ html, body {
     font-family: "Microsoft YaHei", "PingFang SC", "Ali普惠体", sans-serif;
 }
 
-/* Mobile adaptation */
+/* 移动端适配 */
 @media screen and (max-width: 768px) {
-    /* Mobile restore default margins */
+    /* 移动端恢复默认边距 */
     #chatbot .bot-row {
         margin-left: 50px !important;
         width: calc(100% - 50px) !important;
@@ -279,7 +308,7 @@ html, body {
     }
 }
 
-/* Tool Result styles */
+/* Tool Result 样式 */
 .tool-result-details { border: 1px solid #444; border-radius: 8px; padding: 10px; margin: 10px 0; background-color: #2b2b2b; }
 .tool-result-summary::-webkit-details-marker { display: none; }
 .tool-result-summary { list-style: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; color: #eee; outline: none; }
@@ -289,7 +318,7 @@ html, body {
 .tool-result-details[open] .tool-result-icon { transform: rotate(180deg); }
 .tool-result-icon { transition: transform 0.2s ease; fill: none; stroke: #eee; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Tool Call styles */
+/* Tool Call 样式 */
 .tool-call-details { border: 1px solid #3d4a5f; border-radius: 8px; padding: 10px; margin: 10px 0; background-color: #252b33; }
 .tool-call-summary::-webkit-details-marker { display: none; }
 .tool-call-summary { list-style: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; color: #d9e6ff; outline: none; }
@@ -299,7 +328,7 @@ html, body {
 .tool-call-details[open] .tool-call-icon { transform: rotate(180deg); }
 .tool-call-icon { transition: transform 0.2s ease; fill: none; stroke: #d9e6ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Think Result styles */
+/* Think Result 样式 */
 .think-result-details { border: 1px solid #555; border-radius: 8px; padding: 10px; margin: 10px 0; background-color: #2a2a3a; }
 .think-result-summary::-webkit-details-marker { display: none; }
 .think-result-summary { list-style: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; color: #aaa; outline: none; }
@@ -308,21 +337,52 @@ html, body {
 .think-result-details[open] .think-result-icon { transform: rotate(180deg); }
 .think-result-icon { transition: transform 0.2s ease; fill: none; stroke: #aaa; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Hide Chatbot clear/delete button in top right corner */
+/* 隐藏 Chatbot 右上角的清空/删除按钮 */
 #chatbot button[aria-label="Clear"] {
     display: none !important;
 }
 """
 
 
-# Theme configuration
+# 主题配置
 theme = gr.themes.Soft(primary_hue="blue", secondary_hue="blue")
 
 
+def _show_stop_button():
+    return gr.update(visible=False), gr.update(visible=True)
+
+
+def _show_send_button():
+    return gr.update(visible=True), gr.update(visible=False)
+
+
+def _clear_active_typing_indicator(history):
+    updated_history = list(history or [])
+    if not updated_history:
+        return updated_history
+
+    last_message = updated_history[-1]
+    if (
+        isinstance(last_message, dict)
+        and last_message.get("role") == "assistant"
+        and isinstance(last_message.get("content"), str)
+        and last_message["content"].startswith('<span class="typing-indicator"')
+    ):
+        copied = dict(last_message)
+        copied["content"] = ""
+        updated_history[-1] = copied
+    return updated_history
+
+
+def _stop_generation(history):
+    send_update, stop_update = _show_send_button()
+    return send_update, stop_update, _clear_active_typing_indicator(history)
+
+
 def create_ui(llm_func, tab_name, main_title, initial_message=None):
-    """Create chat interface"""
+    """创建聊天界面"""
     with gr.Blocks(title=tab_name, fill_width=True) as ui:
-        # Header area
+        # 标题区域
         gr.Markdown(
             f"""
             # <center>{main_title}</center>
@@ -331,18 +391,18 @@ def create_ui(llm_func, tab_name, main_title, initial_message=None):
             elem_classes=["dark"]
         )
 
-        # Avatar paths
+        # 头像路径
         root_dir = os.path.dirname(os.path.dirname(__file__))
         user_avatar_path = os.path.join(root_dir, "images", "user.png")
         ai_avatar_path = os.path.join(root_dir, "images", "ai.png")
 
-        # Chat area
+        # 聊天区域
         chatbot = gr.Chatbot(
             value=initial_message,
             elem_id="chatbot",
             avatar_images=(
-                user_avatar_path,  # User avatar
-                ai_avatar_path     # AI avatar
+                user_avatar_path,  # 用户头像
+                ai_avatar_path     # AI头像
             ),
             height=600,
             show_label=False,
@@ -350,26 +410,69 @@ def create_ui(llm_func, tab_name, main_title, initial_message=None):
             buttons=[]  # 禁用右上角的所有按钮（分享、复制、清空等）
         )
 
-        # Input area
-        with gr.Row(elem_classes=["input-row", "dark"]) as input_row:
+        # 输入区域
+        with gr.Row(elem_classes=["input-row", "dark"]):
             msg = gr.Textbox(
-                placeholder="Enter message...",
+                placeholder="输入消息...",
                 show_label=False,
                 container=False,
                 elem_classes=["textbox", "dark"]
             )
-            submit_btn = gr.Button("Send", elem_classes=["button"])
+            submit_btn = gr.Button("发送", elem_classes=["button"])
+            stop_btn = gr.Button(
+                "中止",
+                visible=False,
+                variant="stop",
+                elem_classes=["button", "stop-button"],
+            )
 
-        msg.submit(
+        enter_start = msg.submit(
+            _show_stop_button,
+            None,
+            [submit_btn, stop_btn],
+            queue=False,
+            show_progress="hidden",
+        )
+        enter_generation = enter_start.then(
             llm_func,
             [msg, chatbot],
             [msg, chatbot]
         )
-        
-        submit_btn.click(
+        enter_generation.then(
+            _show_send_button,
+            None,
+            [submit_btn, stop_btn],
+            queue=False,
+            show_progress="hidden",
+        )
+
+        click_start = submit_btn.click(
+            _show_stop_button,
+            None,
+            [submit_btn, stop_btn],
+            queue=False,
+            show_progress="hidden",
+        )
+        click_generation = click_start.then(
             llm_func,
             [msg, chatbot],
             [msg, chatbot]
+        )
+        click_generation.then(
+            _show_send_button,
+            None,
+            [submit_btn, stop_btn],
+            queue=False,
+            show_progress="hidden",
+        )
+
+        stop_btn.click(
+            _stop_generation,
+            [chatbot],
+            [submit_btn, stop_btn, chatbot],
+            queue=False,
+            show_progress="hidden",
+            cancels=[enter_generation, click_generation],
         )
     
     return ui
@@ -385,7 +488,7 @@ if __name__ == "__main__":
     app.launch(
         server_name="localhost",
         server_port=7860,
-        share=False,  # Must be False for internal use
+        share=False,  # 内部使用时，必须为 False
         theme=theme,
         css=custom_css
     )

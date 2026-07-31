@@ -25,3 +25,6 @@ _static
 # Claude Code local settings
 .claude/settings.local.json
 
+.qwen
+.pytest_cache
+.ruff_cache

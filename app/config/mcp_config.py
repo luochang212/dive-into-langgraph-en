@@ -1,5 +1,5 @@
 """
-MCP Configuration
+MCP 配置
 """
 
 import os
@@ -11,10 +11,10 @@ def gen_abspath(base_path: str, rel_path: str) -> str:
 
 
 def get_mcp_dict(base_path: str = "./") -> dict:
-    """Get MCP configuration"""
+    """获取 MCP 配置"""
     return {
-        # Services marked with 🌟 below are recommended to enable
-        # =============== Code Execution MCP ===============
+        # 下面标 🌟 的服务建议开启
+        # =============== 代码执行 MCP ===============
         # 🌟 stdio
         "code-execution:stdio": {
             "command": "python",
@@ -26,14 +26,14 @@ def get_mcp_dict(base_path: str = "./") -> dict:
             "url": "http://localhost:8001/mcp",
             "transport": "streamable_http",
         },
-        # =============== AMap (Gaode Maps) MCP ===============
+        # =============== 高德地图 MCP ===============
         # 🌟 streamable http
-        # Must apply for AMap API_KEY first, see .env.example for details
+        # 必须先申请高德地图 API_KEY，详见 .env.example
         "amap-maps:http": {
             "url": f"https://mcp.amap.com/mcp?key={os.getenv('AMAP_API_KEY')}",
             "transport": "streamable_http",
         },
-        # =============== Chart Visualization MCP ===============
+        # =============== 图表可视化 MCP ===============
         # 🌟 stdio
         "antv-chart:stdio": {
             "command": "npx",
@@ -41,12 +41,12 @@ def get_mcp_dict(base_path: str = "./") -> dict:
             "transport": "stdio",
         },
         # streamable http
-        # Must start the service first, refer to mcp/mcp-server-chart/README.md
+        # 必须先启动服务，参考 mcp/mcp-server-chart/README.md
         "antv-chart:http": {
             "url": "http://localhost:1123/mcp",
             "transport": "streamable_http",
         },
-        # =============== Filesystem MCP ===============
+        # =============== 文件系统 MCP ===============
         # 🌟 stdio
         "filesystem:stdio": {
             "command": "npx",

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Optimize thinking process content display
+优化思考过程内容显示
 """
 
 import html
@@ -9,10 +9,10 @@ import html
 
 def format_think_result(think_content: str) -> str:
     """
-    Format thinking process content and return HTML string.
+    格式化思考过程内容，返回 HTML 字符串。
 
-    :param think_content: Thinking process content
-    :return: Formatted HTML string
+    :param think_content: 思考过程内容
+    :return: 格式化后的 HTML 字符串
     """
     if not think_content:
         return ""

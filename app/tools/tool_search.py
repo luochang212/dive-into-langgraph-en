@@ -1,5 +1,5 @@
 """
-Internet search tool
+联网搜索工具
 """
 
 import dashscope
@@ -14,7 +14,7 @@ def dashscope_search(
     query: str,
     runtime: ToolRuntime[ToolSchema],
 ) -> str:
-    """Use DashScope search API to search for internet information"""
+    """使用 DashScope 提供的搜索 API 搜索互联网信息"""
     dashscope.api_key = runtime.context.api_key
 
     response = Generation.call(

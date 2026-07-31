@@ -1,7 +1,6 @@
 """
-The tool_calls parameter returned by DeepSeek model is usually in JSON string format.
-This module automatically parses it into a dictionary object to ensure compatibility
-with downstream components. Code from @HKUDS
+DeepSeek 模型返回的 tool_calls 参数通常是 JSON 字符串格式，
+本模块自动将其解析为字典对象，以确保兼容下游组件。代码来自 @HKUDS
 """
 
 import json

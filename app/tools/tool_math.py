@@ -1,5 +1,5 @@
 """
-Math calculation tool
+数学计算工具
 """
 
 from langchain.tools import tool
@@ -7,25 +7,25 @@ from langchain.tools import tool
 
 @tool()
 def add(a: float, b: float) -> float:
-    """Add two numbers (supports integers and floats)"""
+    """两数相加 (支持整数和浮点数)"""
     return float(a) + float(b)
 
 
 @tool()
 def subtract(a: float, b: float) -> float:
-    """Subtract two numbers (supports integers and floats)"""
+    """两数相减 (支持整数和浮点数)"""
     return float(a) - float(b)
 
 
 @tool()
 def multiply(a: float, b: float) -> float:
-    """Multiply two numbers (supports integers and floats)"""
+    """两数相乘 (支持整数和浮点数)"""
     return float(a) * float(b)
 
 
 @tool()
 def divide(a: float, b: float) -> float:
-    """Divide two numbers (supports integers and floats)"""
+    """两数相除 (支持整数和浮点数)"""
     if float(b) == 0:
         return "Error: Division by zero"
     return float(a) / float(b)
