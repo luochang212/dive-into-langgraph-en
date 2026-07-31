@@ -15,10 +15,12 @@ llm = ChatOpenAI(
     model="qwen3-coder-plus",
 )
 
+
 # 1) Define a simple tool
 def get_weather(city: str) -> str:
     """Return a simple weather string for the given city."""
     return f"It's always sunny in {city}!"
+
 
 # 2) Create tool agent node
 tool_agent = create_agent(
@@ -27,10 +29,12 @@ tool_agent = create_agent(
     system_prompt="You are a helpful assistant",
 )
 
+
 def run_tool_agent(state: MessagesState):
     # Pass messages to agent and return its message stack
     res = tool_agent.invoke({"messages": state["messages"]})
     return {"messages": res["messages"]}
+
 
 # 3) Router node: simple rule to determine if tool is needed
 def route(state: MessagesState):
@@ -39,10 +43,13 @@ def route(state: MessagesState):
         return "tool"
     return "chat"
 
+
 graph_builder = StateGraph(MessagesState)
+
 
 def chatbot(state: MessagesState):
     return {"messages": [llm.invoke(state["messages"])]}
+
 
 graph_builder.add_node("router", lambda s: s)
 graph_builder.add_node("chatbot", chatbot)

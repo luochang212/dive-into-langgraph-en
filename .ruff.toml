@@ -1,0 +1,8 @@
+# Single source of truth for ruff config across the whole project.
+# app/ no longer carries its own [tool.ruff]; it is managed here to avoid duplication.
+line-length = 100
+
+[lint]
+# Explicitly declare the baseline rule set instead of relying on ruff's
+# default `select`, which changes across versions (0.16.x widened it).
+select = ["E4", "E7", "E9", "F"]
